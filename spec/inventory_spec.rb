@@ -10,72 +10,112 @@ RSpec.describe Inventory do
       end
     end
 
-    context "when adding a lemon" do
-      it "has 1 more lemon than before" do
-        expect {
-          inventory.add_lemons(1)
-        }.to change {inventory.lemons}.by 1
+    context "when adding lemons" do
+      context "when adding a positive amount of lemons" do
+        it "has 1 more lemon than before" do
+          expect {
+            inventory.add_lemons(1)
+          }.to change {inventory.lemons}.by 1
+        end
+      end
+
+      context "when adding a negative amount of lemons" do
+        it "raises an error" do
+          expect {
+            inventory.add_lemons(-1)
+          }.to raise_exception
+        end
       end
     end
 
-    context "when adding a negative amount of lemons" do
-      before do 
-        inventory.add_lemons(10)
+    context "when removing lemons" do
+      let(:num_lemons) {5}
+      before do
+        inventory.add_lemons(2 * num_lemons)
       end
 
-      context "when the amount to remove is more than the inventory has" do
-        it "raises exeption" do
-          expect {
-            inventory.add_lemons(-15)
-          }.to raise_exception 
-        end
-        
-        context "when the amount to remove is less than the inventory has" do
-          it "has that many lemons removed" do
+      context "when removing a positive amount of lemons" do
+        context "when there is enough lemons to remove" do
+          it "will have that many less lemons" do
             expect {
-              inventory.add_lemons(-5)
-            }.to change{inventory.lemons}.by -5
+              inventory.remove_lemons(num_lemons)
+            }.to change {inventory.lemons}.by -num_lemons
           end
+        end
+
+        context "when there isnt enough lemons to remove" do
+          it "raises an error" do
+            expect {
+              inventory.remove_lemons(num_lemons * 3)
+            }.to raise_exception
+          end
+        end
+      end
+
+      context "when removing a negative number of lemons" do
+        it "raises an error" do
+          expect {
+            inventory.remove_lemons(-num_lemons)
+          }.to raise_exception
         end
       end
     end
   end
 
   describe "#sugar" do
-    context "when the inventory is initilized" do
+    context "when the inventory is initialized" do
       it "will have 0 sugar" do
         expect(inventory.sugar).to eq 0
       end
     end
 
     context "when adding sugar" do
-      context "when addin '1' sugar" do
-        it "will have 1 more sugar than before" do
+      context "when adding a positive amount of sugar" do
+        it "has 1 more lemon than before" do
           expect {
             inventory.add_sugar(1)
           }.to change {inventory.sugar}.by 1
         end
       end
+
+      context "when adding a negative amount of sugar" do
+        it "raises an error" do
+          expect {
+            inventory.add_sugar(-1)
+          }.to raise_exception
+        end
+      end
     end
 
-    context "when adding a negative amount of sugar" do
-      before do 
-        inventory.add_sugar(10)
+    context "when removing sugar" do
+      let(:num_sugar) {5}
+      before do
+        inventory.add_sugar(2 * num_sugar)
       end
 
-      context "when the amount to remove is more than the inventory has" do
-        it "raises exeption" do
-          expect {
-            inventory.add_sugar(-15)
-          }.to raise_exception 
-        end
-        
-        context "when the amount to remove is less than the inventory has" do
-          it "has that many sugar removed" do
+      context "when removing a positive amount of sugar" do
+        context "when there is enough sugar to remove" do
+          it "will have that many less sugar" do
             expect {
-              inventory.add_sugar(-5)
-            }.to change{inventory.sugar}.by -5
+              inventory.remove_sugar(num_sugar)
+            }.to change {inventory.sugar}.by -num_sugar
           end
+        end
+
+        context "when there isnt enough sugar to remove" do
+          it "raises an error" do
+            expect {
+              inventory.remove_sugar(num_sugar * 3)
+            }.to raise_exception
+          end
+        end
+      end
+
+      context "when removing a negative number of sugar" do
+        it "raises an error" do
+          expect {
+            inventory.remove_sugar(-num_sugar)
+          }.to raise_exception
         end
       end
     end

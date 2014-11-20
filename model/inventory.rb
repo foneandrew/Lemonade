@@ -17,13 +17,25 @@ class Inventory
   #and methods it needs to provide, and how to do that so that it reads nicely
 
   def add_lemons(number_of_lemons)
-    raise 'resulting number of lemons cannot be negative' if (@lemons + number_of_lemons) < 0
+    raise 'cannot add negative lemons' if number_of_lemons < 0
     @lemons += number_of_lemons
   end
 
+  def remove_lemons(number_of_lemons)
+    raise 'cannot remove negative lemons' if number_of_lemons < 0
+    raise 'resulting number of lemons cannot be negative' if (@lemons - number_of_lemons) < 0
+    @lemons -= number_of_lemons
+  end
+
   def add_sugar(number_of_sugar)
-    raise 'resulting number of sugar cannot be negative' if (@sugar + number_of_sugar) < 0
+    raise 'cannot add negative sugar' if number_of_sugar < 0
     @sugar += number_of_sugar
+  end
+
+  def remove_sugar(number_of_sugar)
+    raise 'cannot remove negative sugar' if number_of_sugar < 0
+    raise 'resulting number of sugar cannot be negative' if (@sugar - number_of_sugar) < 0
+    @sugar -= number_of_sugar
   end
 
   def cups=(number_of_cups)
