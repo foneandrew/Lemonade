@@ -1,3 +1,6 @@
+require_relative 'climate'
+require_relative 'population'
+
 class Day
   INITIAL_TEMPERATURE = 20
 
