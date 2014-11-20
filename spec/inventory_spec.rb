@@ -172,6 +172,14 @@ RSpec.describe Inventory do
           }.to change{inventory.money}.by decimal_amount
         end
       end
+
+      context "when adding a negative amount of money" do
+        it "raises an exception" do
+          expect{
+            inventory.add_money(-amount)
+          }.to raise_exception
+        end
+      end
     end
 
     context "when deducting money" do
@@ -182,23 +190,31 @@ RSpec.describe Inventory do
 
         it "should remove the passed amount from dollars" do
           expect {
-            inventory.add_money(-amount)
+            inventory.remove_money(amount)
           }.to change{inventory.money}.by -amount
         end
 
         context "when charging a decimal amount" do
           it "should remove the decimal amount" do
             expect{
-              inventory.add_money(-decimal_amount)
+              inventory.remove_money(decimal_amount)
             }.to change{inventory.money}.by -decimal_amount
           end
+        end
+      end
+
+      context "when removing a negative amount of money" do
+        it "raises an exception" do
+          expect{
+            inventory.remove_money(-amount)
+          }.to raise_exception
         end
       end
 
       context "without enough money in the inventory" do
         it "an exception should be raised" do
           expect {
-            inventory.add_money(2 * -amount)
+            inventory.remove_money(2 * amount)
           }.to raise_exception
         end
       end

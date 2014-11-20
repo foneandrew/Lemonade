@@ -50,6 +50,24 @@ RSpec.describe MakeLemonadeService do
         it "returns false" do
           expect(service.call(num_cups)).to eq false
         end
+
+        it "does remove any lemons" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.lemons}.by 0
+        end
+
+        it "does remove any sugar" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.sugar}.by 0
+        end
+
+        it "does add any cups" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.cups}.by 0
+        end
       end
 
       context "if there are not enough lemons" do
@@ -59,6 +77,24 @@ RSpec.describe MakeLemonadeService do
 
         it "returns false" do
           expect(service.call(num_cups)).to eq false
+        end
+
+        it "does remove any lemons" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.lemons}.by 0
+        end
+
+        it "does remove any sugar" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.sugar}.by 0
+        end
+
+        it "does add any cups" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.cups}.by 0
         end
       end
 
@@ -70,6 +106,24 @@ RSpec.describe MakeLemonadeService do
 
         it "returns false" do
           expect(service.call(num_cups)).to eq false
+        end
+
+        it "does remove any lemons" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.lemons}.by 0
+        end
+
+        it "does remove any sugar" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.sugar}.by 0
+        end
+
+        it "does add any cups" do
+          expect{
+            service.call(num_cups)
+          }.to change{inventory.cups}.by 0
         end
       end
     end
