@@ -1,9 +1,10 @@
 class Climate
   INITIAL_TEMPERATURE = 20
   TEMPERATURE_VARIANCE = 5
+  attr_reader :origin_temp
 
-  def initialize(previous_temperature: INITIAL_TEMPERATURE)
-    @origin_temp = previous_temperature
+  def initialize(temperature = INITIAL_TEMPERATURE)
+    @origin_temp = temperature
   end
 
   def temperature
