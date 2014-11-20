@@ -14,6 +14,6 @@ class Day
   end
 
   def passing_people
-    @population.walkers
+    @population.pedestrians
   end
 end
