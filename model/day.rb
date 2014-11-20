@@ -2,7 +2,7 @@ require_relative 'climate'
 require_relative 'population'
 
 class Day
-  INITIAL_TEMPERATURE = 20
+  INITIAL_TEMPERATURE = 20.0
 
   def initialize(temperature = INITIAL_TEMPERATURE)
     @climate = Climate.new(temperature)
