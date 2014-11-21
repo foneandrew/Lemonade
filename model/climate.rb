@@ -1,5 +1,6 @@
 class Climate
   TEMPERATURE_VARIANCE = 10
+  #using climate data from https://www.niwa.co.nz/education-and-training/schools/resources/climate/extreme
   MAX_TEMPERATURE = 42.4
   MIN_TEMPERATURE = -25.6
 

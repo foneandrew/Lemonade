@@ -22,6 +22,11 @@ RSpec.describe BuySugarService do
           inventory.add_sugar(1)
         end
 
+        it "uses the market to get the price" do
+          expect(market).to receive(:sugar_price).and_return(sugar_price)
+          service.call(num_sugar)
+        end
+
         it "returns true" do
           expect(service.call(num_sugar)).to eq true
         end

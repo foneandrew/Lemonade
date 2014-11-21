@@ -21,7 +21,7 @@ RSpec.describe Market do
 
   describe "#sugar_price" do
     context "when called initially" do
-      it "sugar should have a price between the min and max lemon price" do
+      it "sugar should have a price between the min and max sugar price" do
         expect(market).to receive(:rand).with(Market::SUGAR_PRICE_MIN..Market::SUGAR_PRICE_MAX).and_return(2)
         expect(market.sugar_price).to eq 2
       end

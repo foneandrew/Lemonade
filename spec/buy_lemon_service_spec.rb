@@ -22,6 +22,11 @@ RSpec.describe BuyLemonService do
           inventory.add_lemons(1)
         end
 
+        it "uses the market to get the price" do
+          expect(market).to receive(:lemon_price).and_return(lemon_price)
+          service.call(num_lemons)
+        end
+
         it "returns true" do
           expect(service.call(num_lemons)).to eq true
         end
