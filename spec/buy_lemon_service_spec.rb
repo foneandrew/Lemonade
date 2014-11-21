@@ -3,7 +3,7 @@ require_relative '../model/market'
 require_relative '../model/inventory'
 
 RSpec.describe BuyLemonService do
-  describe "#call" do
+  describe "#buy" do
     let(:lemon_price) {0.50}
     let(:inventory) {Inventory.new}
     let(:market) {instance_double('Market')}
@@ -24,22 +24,22 @@ RSpec.describe BuyLemonService do
 
         it "uses the market to get the price" do
           expect(market).to receive(:lemon_price).and_return(lemon_price)
-          service.call(num_lemons)
+          service.buy(num_lemons)
         end
 
         it "returns true" do
-          expect(service.call(num_lemons)).to eq true
+          expect(service.buy(num_lemons)).to eq true
         end
 
         it "adds the bought number of lemons to inventory" do
           expect {
-            service.call(num_lemons)
+            service.buy(num_lemons)
           }.to change{inventory.lemons}.by num_lemons
         end
 
         it "removes the money from inventory (number of lemons * lemon price)" do
           expect {
-            service.call(num_lemons)
+            service.buy(num_lemons)
           }.to change{inventory.money}.by -(num_lemons * lemon_price)
         end
       end
@@ -51,18 +51,18 @@ RSpec.describe BuyLemonService do
         end
 
         it "returns false" do
-          expect(service.call(num_lemons)).to eq false
+          expect(service.buy(num_lemons)).to eq false
         end
 
         it "does not add any lemons" do
           expect {
-            service.call(num_lemons)
+            service.buy(num_lemons)
           }.to change{inventory.lemons}.by 0
         end
 
         it "does not remove any money from inventory" do
           expect {
-            service.call(num_lemons)
+            service.buy(num_lemons)
           }.to change{inventory.money}.by 0
         end
       end

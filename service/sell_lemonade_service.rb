@@ -6,7 +6,7 @@ class SellLemonadeService
     @inventory = inventory
   end
 
-  def call(price)
+  def sell(price)
     sold_cups = [demand(price), @inventory.cups].min
     @inventory.cups = 0
     @inventory.add_money(sold_cups * price)

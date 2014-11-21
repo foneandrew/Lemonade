@@ -39,7 +39,7 @@ RSpec.describe SellLemonadeService do
     end
   end
 
-  describe "#call" do
+  describe "#sell" do
     context "selling lemonade" do
       let(:inventory) {Inventory.new}
       let(:pedestrians) {50}
@@ -54,18 +54,18 @@ RSpec.describe SellLemonadeService do
         end
 
         it "returns the number of lemonades bought (non-negative)" do
-          expect(service.call(lemonade_price)).to be > 0
+          expect(service.sell(lemonade_price)).to be > 0
         end
 
         it "removes ALL lemonades from the inventory" do
           expect{
-            service.call(lemonade_price)
+            service.sell(lemonade_price)
           }.to change{inventory.cups}.to eq 0
         end
 
         it "adds the profit to the inventory" do
           expect{
-            service.call(lemonade_price)
+            service.sell(lemonade_price)
           }.to change{inventory.money}.by cups * lemonade_price
         end
       end
@@ -77,7 +77,7 @@ RSpec.describe SellLemonadeService do
         end
         
         it "only sells the amount of lemonade that is in the inventory" do
-          expect(service.call(lemonade_price)).to eq cups
+          expect(service.sell(lemonade_price)).to eq cups
         end
       end
 
@@ -88,7 +88,7 @@ RSpec.describe SellLemonadeService do
         end
         
         it "only sells the amount of lemonade that was in demand" do
-          expect(service.call(lemonade_price)).to eq cups
+          expect(service.sell(lemonade_price)).to eq cups
         end
       end
     end
