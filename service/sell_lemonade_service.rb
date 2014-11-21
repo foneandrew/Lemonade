@@ -1,8 +1,16 @@
 require_relative '../model/market'
 
 class SellLemonadeService
-  def initialize(pedestrians)
+  def initialize(pedestrians: pedestrians, inventory: inventory)
     @pedestrians = pedestrians
+    @inventory = inventory
+  end
+
+  def call(price)
+    sold_cups = [demand(price), @inventory.cups].min
+    @inventory.cups = 0
+    @inventory.add_money(sold_cups * price)
+    sold_cups
   end
 
   def demand(price)
