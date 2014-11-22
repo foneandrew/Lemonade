@@ -10,7 +10,7 @@ class SellLemonadeService
     sold_cups = [demand(price), @inventory.cups].min
     @inventory.cups = 0
     @inventory.add_money(sold_cups * price)
-    sold_cups
+    return sold_cups, (sold_cups * price)
   end
 
   def demand(price)

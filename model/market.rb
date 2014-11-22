@@ -5,10 +5,10 @@ class Market
   SUGAR_PRICE_MAX = 0.05
 
   def lemon_price
-    @lemon_price ||= rand(LEMON_PRICE_MIN..LEMON_PRICE_MAX)
+    @lemon_price ||= rand(LEMON_PRICE_MIN..LEMON_PRICE_MAX).round(2)
   end
 
   def sugar_price
-    @sugar_price ||= rand(SUGAR_PRICE_MIN..SUGAR_PRICE_MAX)
+    @sugar_price ||= rand(SUGAR_PRICE_MIN..SUGAR_PRICE_MAX).round(2)
   end
 end

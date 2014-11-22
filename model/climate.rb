@@ -15,7 +15,7 @@ class Climate
   private
 
   def generate_temperature
-    new_temperature = ::Kernel.rand(@origin_temp - TEMPERATURE_VARIANCE..@origin_temp + TEMPERATURE_VARIANCE)
+    new_temperature = ::Kernel.rand(@origin_temp - TEMPERATURE_VARIANCE..@origin_temp + TEMPERATURE_VARIANCE).round(1)
     new_temperature = [new_temperature, MAX_TEMPERATURE].min
     [new_temperature, MIN_TEMPERATURE].max
   end

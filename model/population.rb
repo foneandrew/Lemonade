@@ -1,7 +1,7 @@
 require_relative 'climate'
 
 class Population
-  MAX_PEDESTRIANS = 100
+  MAX_PEDESTRIANS = 15
   MIN_PEDESTRIANS = 0
   attr_reader :pedestrians
   

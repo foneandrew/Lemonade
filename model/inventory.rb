@@ -46,11 +46,13 @@ class Inventory
   def add_money(money_amount)
     raise 'cannot add negative money' if money_amount < 0
     @money += money_amount
+    @money = @money.round(2)
   end
 
   def remove_money(money_amount)
     raise 'cannot remove negative money' if money_amount < 0
     raise 'resulting money cannot be negative' if (@money - money_amount) < 0
     @money -= money_amount
+    @money = @money.round(2)
   end
 end
