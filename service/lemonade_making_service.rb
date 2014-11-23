@@ -1,3 +1,0 @@
-class LemonadeMakingService
-  
-end
