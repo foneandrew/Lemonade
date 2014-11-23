@@ -77,7 +77,7 @@ RSpec.describe SellLemonadeService do
         it "adds the profit to the inventory" do
           expect{
             cups_sold, profit = service.sell(lemonade_price)
-          }.to change{inventory.money}.by cups * lemonade_price
+          }.to change{inventory.cents}.by cups * lemonade_price
         end
       end
 

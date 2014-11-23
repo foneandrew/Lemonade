@@ -8,11 +8,11 @@ require_relative 'service/sell_lemonade_service'
 require_relative 'view/text_interface'
 
 class LemonadeStand
-  STARTING_MONEY = 5.0
+  STARTING_cents = 500
 
   def initialize
     @inventory = Inventory.new
-    @inventory.add_money(STARTING_MONEY)
+    @inventory.add_cents(STARTING_cents)
     @display = TextInterface.new
 
     @display.new_game_welcome
@@ -29,7 +29,7 @@ class LemonadeStand
 
     @display.start_of_day(lemon_price: @market.lemon_price, 
       sugar_price: @market.sugar_price, temperature: day.temperature,
-      money: @inventory.money, lemons: @inventory.lemons,
+      cents: @inventory.cents, lemons: @inventory.lemons,
       sugar: @inventory.sugar)
 
     player_purchase_lemons
@@ -47,8 +47,8 @@ class LemonadeStand
 
   def player_sell_lemonade(temperature)
     loop do
-      lemonade_price = @display.sell_lemonade(lemonade: @inventory.cups, 
-        temperature: temperature).to_f.round(2)
+      lemonade_price = (@display.sell_lemonade(lemonade: @inventory.cups, 
+        temperature: temperature).to_f * 100).round
 
       return (@sell_lemonade.sell(lemonade_price)) if lemonade_price > 0
 
@@ -74,7 +74,7 @@ class LemonadeStand
   def player_purchase_lemons
     loop do
       num_lemons = @display.buy_lemons(lemon_price: @market.lemon_price,
-        current_lemons: @inventory.lemons, money: @inventory.money).to_i
+        current_lemons: @inventory.lemons, cents: @inventory.cents).to_i
 
       if num_lemons < 0
         @display.negative_input
@@ -90,7 +90,7 @@ class LemonadeStand
   def player_purchase_sugar
     loop do
       num_sugar = @display.buy_sugar(sugar_price: @market.sugar_price,
-        current_sugar: @inventory.sugar, money: @inventory.money).to_i
+        current_sugar: @inventory.sugar, cents: @inventory.cents).to_i
 
       if num_sugar < 0
         @display.negative_input

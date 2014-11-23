@@ -1,8 +1,8 @@
 require_relative 'climate'
 
 class Population
-  MAX_PEDESTRIANS = 15
-  MIN_PEDESTRIANS = 0
+  MAX_PEDESTRIANS = 50
+  MIN_PEDESTRIANS = 6
   attr_reader :pedestrians
   
   def initialize(temperature)

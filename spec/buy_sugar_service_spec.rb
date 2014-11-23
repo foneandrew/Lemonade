@@ -4,7 +4,7 @@ require_relative '../model/inventory'
 
 RSpec.describe BuySugarService do
   describe "#buy" do
-    let(:sugar_price) {0.05}
+    let(:sugar_price) {5}
     let(:inventory) {Inventory.new}
     let(:market) {instance_double('Market')}
     let(:service) {BuySugarService.new(inventory: inventory, market: market)}
@@ -16,9 +16,9 @@ RSpec.describe BuySugarService do
     context "when buying sugar" do
       let(:num_sugar) {5}
 
-      context "with enough money in the inventory" do
+      context "with enough cents in the inventory" do
         before do
-          inventory.add_money((num_sugar * sugar_price) + 1)
+          inventory.add_cents((num_sugar * sugar_price) + 1)
           inventory.add_sugar(1)
         end
 
@@ -37,16 +37,16 @@ RSpec.describe BuySugarService do
           }.to change{inventory.sugar}.by num_sugar
         end
 
-        it "removes the money from inventory (number of sugar * sugar price)" do
+        it "removes the cents from inventory (number of sugar * sugar price)" do
           expect {
             service.buy(num_sugar)
-          }.to change{inventory.money}.by -(num_sugar * sugar_price)
+          }.to change{inventory.cents}.by -(num_sugar * sugar_price)
         end
       end
 
-      context "without enough money in the inventory" do
+      context "without enough cents in the inventory" do
         before do
-          inventory.add_money((num_sugar * sugar_price)-0.01)
+          inventory.add_cents((num_sugar * sugar_price)-0.01)
           inventory.add_sugar(1)
         end
 
@@ -60,10 +60,10 @@ RSpec.describe BuySugarService do
           }.to change{inventory.sugar}.by 0
         end
 
-        it "does not remove any money from inventory" do
+        it "does not remove any cents from inventory" do
           expect {
             service.buy(num_sugar)
-          }.to change{inventory.money}.by 0
+          }.to change{inventory.cents}.by 0
         end
       end
     end

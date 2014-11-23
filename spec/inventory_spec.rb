@@ -154,67 +154,67 @@ RSpec.describe Inventory do
 
     context "when inventory initilized" do
       it "dollars should be 0" do
-        expect(inventory.money).to eq 0
+        expect(inventory.cents).to eq 0
       end
     end
 
-    context "when adding money" do
-      it "money will increase by the given amount" do
+    context "when adding cents" do
+      it "cents will increase by the given amount" do
         expect {
-          inventory.add_money(amount)
-        }.to change{inventory.money}.by 10
+          inventory.add_cents(amount)
+        }.to change{inventory.cents}.by 10
       end
 
       context "when adding a decimal number" do
-        it "money should increase by the same decimal amount" do
+        it "cents should increase by the integer value of the decimal amount" do
           expect {
-            inventory.add_money(decimal_amount)
-          }.to change{inventory.money}.by decimal_amount
+            inventory.add_cents(decimal_amount)
+          }.to change{inventory.cents}.by decimal_amount.to_i
         end
       end
 
-      context "when adding a negative amount of money" do
+      context "when adding a negative amount of cents" do
         it "raises an exception" do
           expect{
-            inventory.add_money(-amount)
+            inventory.add_cents(-amount)
           }.to raise_exception
         end
       end
     end
 
-    context "when deducting money" do
-      context "with enough money in the inventory" do
+    context "when deducting cents" do
+      context "with enough cents in the inventory" do
         before do
-          inventory.add_money(amount)
+          inventory.add_cents(amount)
         end
 
-        it "should remove the passed amount from dollars" do
+        it "should remove the passed amount from cents" do
           expect {
-            inventory.remove_money(amount)
-          }.to change{inventory.money}.by -amount
+            inventory.remove_cents(amount)
+          }.to change{inventory.cents}.by -amount
         end
 
         context "when charging a decimal amount" do
-          it "should remove the decimal amount" do
+          it "should remove the integer value of the decimal amount" do
             expect{
-              inventory.remove_money(decimal_amount)
-            }.to change{inventory.money}.by -decimal_amount
+              inventory.remove_cents(decimal_amount)
+            }.to change{inventory.cents}.by -decimal_amount.to_i
           end
         end
       end
 
-      context "when removing a negative amount of money" do
+      context "when removing a negative amount of cents" do
         it "raises an exception" do
           expect{
-            inventory.remove_money(-amount)
+            inventory.remove_cents(-amount)
           }.to raise_exception
         end
       end
 
-      context "without enough money in the inventory" do
+      context "without enough cents in the inventory" do
         it "an exception should be raised" do
           expect {
-            inventory.remove_money(2 * amount)
+            inventory.remove_cents(2 * amount)
           }.to raise_exception
         end
       end

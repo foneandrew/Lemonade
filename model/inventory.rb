@@ -2,13 +2,13 @@ class Inventory
   attr_reader :lemons
   attr_reader :sugar
   attr_reader :cups
-  attr_reader :money
+  attr_reader :cents
 
   def initialize
     @lemons = 0
     @sugar = 0
     @cups = 0
-    @money = 0.0
+    @cents = 0
   end
 
   #adding a negative amount of something is kinda dumb
@@ -43,16 +43,14 @@ class Inventory
     @cups = number_of_cups
   end
 
-  def add_money(money_amount)
-    raise 'cannot add negative money' if money_amount < 0
-    @money += money_amount
-    @money = @money.round(2)
+  def add_cents(cents_amount)
+    raise 'cannot add negative cents' if cents_amount < 0
+    @cents += cents_amount.to_i
   end
 
-  def remove_money(money_amount)
-    raise 'cannot remove negative money' if money_amount < 0
-    raise 'resulting money cannot be negative' if (@money - money_amount) < 0
-    @money -= money_amount
-    @money = @money.round(2)
+  def remove_cents(cents_amount)
+    raise 'cannot remove negative cents' if cents_amount < 0
+    raise 'resulting cents cannot be negative' if (@cents - cents_amount) < 0
+    @cents -= cents_amount.to_i
   end
 end
