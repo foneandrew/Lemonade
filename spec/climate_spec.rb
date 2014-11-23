@@ -1,9 +1,9 @@
-require_relative '../model/climate'
+require_relative '../lib/model/climate'
 
 RSpec.describe Climate do
   describe "#temperature" do
       let(:custom_temp) {20}
-      let(:climate) {Climate.new(custom_temp)}
+      let(:climate) {Climate.new(previous_temperature: custom_temp)}
       let(:max_temp) {Climate::MAX_TEMPERATURE}
       let(:min_temp) {Climate::MIN_TEMPERATURE}
 
@@ -27,7 +27,7 @@ RSpec.describe Climate do
       end
 
       it "will reach an upper limit and not go above it" do
-        expect(Climate.new(max_temp * 2).temperature).to eq max_temp
+        expect(Climate.new(previous_temperature: max_temp * 2).temperature).to eq max_temp
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe Climate do
       end
 
       it "will reach an upper limit and not go above it" do
-        expect(Climate.new(min_temp * 2).temperature).to eq min_temp
+        expect(Climate.new(previous_temperature: min_temp * 2).temperature).to eq min_temp
       end
     end
   end

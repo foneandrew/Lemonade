@@ -1,6 +1,6 @@
-require_relative '../service/buy_lemon_service'
-require_relative '../model/market'
-require_relative '../model/inventory'
+require_relative '../lib/service/buy_lemon_service'
+require_relative '../lib/model/market'
+require_relative '../lib/model/inventory'
 
 RSpec.describe BuyLemonService do
   describe "#buy" do

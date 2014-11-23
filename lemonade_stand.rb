@@ -1,18 +1,18 @@
-require_relative 'model/inventory'
-require_relative 'model/market'
-require_relative 'model/day'
-require_relative 'service/buy_sugar_service'
-require_relative 'service/buy_lemon_service'
-require_relative 'service/make_lemonade_service'
-require_relative 'service/sell_lemonade_service'
-require_relative 'view/text_interface'
+require_relative 'lib/model/inventory'
+require_relative 'lib/model/market'
+require_relative 'lib/model/day'
+require_relative 'lib/service/buy_sugar_service'
+require_relative 'lib/service/buy_lemon_service'
+require_relative 'lib/service/make_lemonade_service'
+require_relative 'lib/service/sell_lemonade_service'
+require_relative 'lib/view/text_interface'
 
 class LemonadeStand
-  STARTING_cents = 500
+  STARTING_CENTS = 500
 
   def initialize
     @inventory = Inventory.new
-    @inventory.add_cents(STARTING_cents)
+    @inventory.add_cents(STARTING_CENTS)
     @display = TextInterface.new
 
     @display.new_game_welcome
@@ -23,7 +23,7 @@ class LemonadeStand
     @market = Market.new
     @buy_lemons = BuyLemonService.new(inventory: @inventory, market: @market)
     @buy_sugar = BuySugarService.new(inventory: @inventory, market: @market)
-    @make_lemonade = MakeLemonadeService.new(@inventory)
+    @make_lemonade = MakeLemonadeService.new(inventory: @inventory)
     @sell_lemonade = SellLemonadeService.new(pedestrians: day.passing_people,
       inventory: @inventory)
 
@@ -40,7 +40,7 @@ class LemonadeStand
     @display.sales_report(lemonade_cups_sold: cups_sold, profit: profit,
       pedestrians: day.passing_people)
 
-    play_a_day(Day.new(day.temperature))
+    play_a_day(Day.new(previous_temperature: day.temperature))
   end
 
   private

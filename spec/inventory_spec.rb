@@ -1,4 +1,4 @@
-require_relative '../model/inventory'
+require_relative '../lib/model/inventory'
 
 RSpec.describe Inventory do 
   let(:inventory) {Inventory.new}

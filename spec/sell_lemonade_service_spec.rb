@@ -1,10 +1,11 @@
-require_relative '../service/sell_lemonade_service'
+require_relative '../lib/service/sell_lemonade_service'
 
 RSpec.describe SellLemonadeService do
   describe "#demand" do
     let(:pedestrians_high) {70}
     let(:pedestrians_low) {30}
-    let(:service) {SellLemonadeService.new(pedestrians: pedestrians_low)}
+    let(:inventory) {Inventory.new}
+    let(:service) {SellLemonadeService.new(pedestrians: pedestrians_low, inventory: inventory)}
     let(:lemonade_price) {2}
 
     context "when selling lemonade" do
@@ -18,8 +19,8 @@ RSpec.describe SellLemonadeService do
       end
 
       context "when the number of pedestrians is lower" do
-        let(:service_lower) {SellLemonadeService.new(pedestrians: pedestrians_low)}
-        let(:service_higher) {SellLemonadeService.new(pedestrians: pedestrians_high)}
+        let(:service_lower) {SellLemonadeService.new(pedestrians: pedestrians_low, inventory: inventory)}
+        let(:service_higher) {SellLemonadeService.new(pedestrians: pedestrians_high, inventory: inventory)}
 
         it "demand will be lower" do
           expect(service_lower.demand(lemonade_price)).to be <= service_higher.demand(lemonade_price)
@@ -27,8 +28,8 @@ RSpec.describe SellLemonadeService do
       end
 
       context "when the price is higher" do
-        let(:service_lower) {SellLemonadeService.new(pedestrians: pedestrians_low)}
-        let(:service_higher) {SellLemonadeService.new(pedestrians: pedestrians_low )}
+        let(:service_lower) {SellLemonadeService.new(pedestrians: pedestrians_low, inventory: inventory)}
+        let(:service_higher) {SellLemonadeService.new(pedestrians: pedestrians_low, inventory: inventory)}
         let(:price_high) {5}
         let(:price_low) {1}
 

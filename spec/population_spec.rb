@@ -1,5 +1,5 @@
-require_relative '../model/population'
-require_relative '../model/climate'
+require_relative '../lib/model/population'
+require_relative '../lib/model/climate'
 
 RSpec.describe Population do
   describe "#pedestrians" do

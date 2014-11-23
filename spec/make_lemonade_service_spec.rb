@@ -1,8 +1,8 @@
-require_relative '../service/make_lemonade_service'
+require_relative '../lib/service/make_lemonade_service'
 
 RSpec.describe MakeLemonadeService do
   let(:inventory) {Inventory.new}
-  let(:service) {MakeLemonadeService.new(inventory)}
+  let(:service) {MakeLemonadeService.new(inventory: inventory)}
 
   describe "#make" do
     let(:num_cups) {5}

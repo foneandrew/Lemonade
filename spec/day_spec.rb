@@ -1,6 +1,6 @@
-require_relative '../model/day'
-require_relative '../model/climate'
-require_relative '../model/population'
+require_relative '../lib/model/day'
+require_relative '../lib/model/climate'
+require_relative '../lib/model/population'
 
 RSpec.describe Day do
   describe "#new" do
@@ -18,7 +18,7 @@ RSpec.describe Day do
 
     context "when created with a previous temperature given" do
       let(:temperature) {100}
-      let(:day) {Day.new(temperature)}
+      let(:day) {Day.new(previous_temperature: temperature)}
       let(:climate) {instance_double("Climate")}
 
       it "will have a temperature" do
@@ -30,7 +30,7 @@ RSpec.describe Day do
       end
 
       it "uses that temperature to determine the new temperature" do  
-        expect(Climate).to receive(:new).with(temperature).and_return(climate)
+        expect(Climate).to receive(:new).with(previous_temperature: temperature).and_return(climate)
         expect(climate).to receive(:temperature).and_return(temperature)
         day
       end

@@ -1,4 +1,4 @@
-require_relative '../model/market'
+require_relative '../lib/model/market'
 
 RSpec.describe Market do
   let(:market) {Market.new}
